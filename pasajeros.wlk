@@ -17,3 +17,18 @@
     }
     method vitalidad() = energia / 10
  }
+ object morfeo{
+        var vitalidad = 8
+        var cansado = false
+    method esElElegido() = false 
+    method saltar(){
+           vitalidad = vitalidad - 1
+           cansado = not cansado
+    }
+    method vitalidad() = vitalidad
+ }
+ object trinity{
+    method esElElegido() = false 
+    method saltar(){}
+    method vitalidad() = 0
+ }
