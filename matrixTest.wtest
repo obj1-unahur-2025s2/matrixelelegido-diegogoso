@@ -1,9 +1,17 @@
+import pasajeros.*
 
 
-describe "group of tests " {
+describe "testeamos a Neo " {
+  test "Neo es el Elegido"{
+    assert.that(neo.esElElegido())
+  }
 
-  test "test 01" {
-    assert.equals(100, 50+50)
+  test "test neo vitalidad inicial"{
+    assert.equals(10, neo.vitalidad())
+  }
+  test "test neo vitalidad despues de saltar"{
+    neo.saltar()
+    assert.equals(5, neo.vitalidad())  
   }
 
 }
