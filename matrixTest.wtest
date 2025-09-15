@@ -33,3 +33,23 @@ describe "testeamos a Morfeo" {
   }
 
 }
+describe "testeamos a Trinity" {
+  test "trinity es el Elegido"{
+    assert.notThat(trinity.esElElegido())
+  }
+
+  test "test trinity vitalidad inicial"{
+    assert.equals(0, trinity.vitalidad())
+  }
+  test "test trinity vitalidad despues de saltar"{
+    trinity.saltar()
+    assert.equals(0, trinity.vitalidad())  
+  }
+  test "test trinity vitalidad despues de saltar varias veces"{
+    trinity.saltar()
+    trinity.saltar()
+    trinity.saltar()
+    assert.equals(0, trinity.vitalidad())  
+  }
+
+}
