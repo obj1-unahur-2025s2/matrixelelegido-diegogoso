@@ -1,4 +1,5 @@
 import pasajeros.*
+import nave.*
 
 
 describe "testeamos a Neo " {
@@ -15,7 +16,8 @@ describe "testeamos a Neo " {
   }
 
 }
-describe "testeamos a Morfeo" {
+
+describe "testeamos a nave" {
   test "morfeo es el Elegido"{
     assert.notThat(morfeo.esElElegido())
   }
@@ -52,4 +54,51 @@ describe "testeamos a Trinity" {
     assert.equals(0, trinity.vitalidad())  
   }
 
+}
+describe "testeamos a la nave" {
+  test "antes de agregar pasajeros, la nave esta vacia"{
+    assert.equals(0, nave.cantidadDePasajeros())
+    nave.pasajeros.clear()
+    nave.agregarPasajero(neo)
+    nave.agregarPasajero(morfeo)
+    nave.agregarPasajero(trinity)
+  }
+
+  test "test cantidad de pasajeros"{
+    assert.equals(3, nave.cantidadDePasajeros())
+  }
+  test "test pasajero de mayor vitalidad"{
+    assert.equals(morfeo, nave.pasajeroDeMayorVitalidad())
+  }
+  test "test esta equilibrada en vitalidad"{
+    assert.that(nave.estaEquilibradaEnVitalidad())
+    morfeo.saltar() //vitalidad 7
+    assert.that(nave.estaEquilibradaEnVitalidad())
+    morfeo.saltar() //vitalidad 6
+    assert.that(nave.estaEquilibradaEnVitalidad())
+    morfeo.saltar() //vitalidad 5
+    assert.that(not nave.estaEquilibradaEnVitalidad())
+  }
+  test "test esta el elegido"{
+    assert.that(nave.estaElElegido())
+  }
+  test "test chocar hace saltar a todos y vacia la nave"{
+    nave.chocar()
+    assert.equals(0, nave.cantidadDePasajeros())
+    assert.equals(50, neo.vitalidad()) //energia 50
+    assert.equals(7, morfeo.vitalidad()) //vitalidad 7
+    assert.equals(0, trinity.vitalidad()) 
+  }
+  test "test acelerar hace saltar a todos menos al elegido y se quedan los que no estan cansados"{
+    morfeo.saltar() //vitalidad 7, cansado true
+    nave.acelerar()
+    assert.equals(2, nave.cantidadDePasajeros())
+    assert.equals(50, neo.vitalidad()) //energia 50
+    assert.equals(7, morfeo.vitalidad()) //vitalidad 7
+    assert.equals(0, trinity.vitalidad()) 
+    nave.acelerar() //morfeo salta de nuevo y queda descansado pero con vitalidad 6
+    assert.equals(2, nave.cantidadDePasajeros())
+    morfeo.saltar() //vitalidad 6, cansado true
+   
+  }
 }
